@@ -1,0 +1,102 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Usuario {
+  id           String            @id @default(uuid())
+  nome         String
+  email        String            @unique
+  peso         Float?
+  altura       Float?
+  idade        Int?
+  sexo         String?
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  treinos      Treino[]
+  sessoes      Sessao[]
+  exercicios   ExercicioBase[]
+}
+
+model ExercicioBase {
+  id                String               @id @default(uuid())
+  nome              String
+  descricao         String?
+  tipoExercicio     String               // cardio, abdominal, força, etc.
+  caloriasPorMinuto Float?
+  imagem            String?
+  usuarioId         String
+  usuario           Usuario              @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
+  exerciciosTreino  ExercicioTreino[]
+}
+
+model Treino {
+  id               String           @id @default(uuid())
+  nome             String
+  descricao        String?
+  nivelDificuldade String
+  exercicios       ExercicioTreino[]
+  usuarioId        String
+  usuario          Usuario          @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  sessoes          Sessao[]
+}
+
+model ExercicioTreino {
+  id               String       @id @default(uuid())
+  exercicioBaseId  String?
+  exercicioBase    ExercicioBase? @relation(fields: [exercicioBaseId], references: [id], onDelete: SetNull)
+  nome             String
+  descricao        String?
+  tipoExercicio    String        // cardio, abdominal, força, etc.
+  caloriasPorMinuto Float?
+  imagem           String?
+  duracao          Int?         // em segundos
+  repeticoes       Int?
+  series           Int?
+  ordem            Int          @default(0)
+  treinoId         String
+  treino           Treino       @relation(fields: [treinoId], references: [id], onDelete: Cascade)
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+  progressos       Progresso[]
+}
+
+model Sessao {
+  id               String        @id @default(uuid())
+  dataSessao       DateTime      @default(now())
+  duracao          Int           // em minutos
+  caloriasQueimadas Float?
+  completado       Boolean       @default(false)
+  treinoId         String
+  treino           Treino        @relation(fields: [treinoId], references: [id], onDelete: Cascade)
+  usuarioId        String
+  usuario          Usuario       @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  progressos       Progresso[]
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+}
+
+model Progresso {
+  id           String          @id @default(uuid())
+  repeticoes   Int?
+  series       Int?
+  peso         Float?          // peso usado no exercício, se aplicável
+  duracao      Int?            // em segundos
+  exercicioId  String
+  exercicio    ExercicioTreino @relation(fields: [exercicioId], references: [id], onDelete: Cascade)
+  sessaoId     String
+  sessao       Sessao          @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+}
