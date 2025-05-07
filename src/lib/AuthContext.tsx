@@ -78,8 +78,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       } else {
         throw new Error('Credenciais inválidas');
       }
-    } catch (error: any) {
-      setError(error.message);
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Erro ao realizar login';
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -104,14 +105,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         id: Date.now().toString(), // ID temporário simulado
         nome: nome,
         email: email
+        // senha não é armazenada no objeto User por questões de segurança
       };
       
       // Salvar o usuário no localStorage
       localStorage.setItem('user', JSON.stringify(userData));
       setUser(userData);
       router.push('/'); // Redirecionar para a página inicial após registro
-    } catch (error: any) {
-      setError(error.message);
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Erro ao realizar cadastro';
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
