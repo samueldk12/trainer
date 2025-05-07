@@ -36,15 +36,11 @@ export default function ExercicioCard({
   view = 'grid'
 }: ExercicioProps) {
   const { 
-    id, 
     nome, 
     descricao, 
     tipoExercicio, 
     caloriasPorMinuto, 
     imagem, 
-    duracao, 
-    repeticoes, 
-    series,
     nivelForca
   } = exercicio;
 

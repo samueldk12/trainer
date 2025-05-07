@@ -87,7 +87,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   // Função de registro
-  const register = async (nome: string, email: string, senha: string) => {
+  const register = async (nome: string, email: string, 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    senha: string) => {
     try {
       setLoading(true);
       setError(null);
