@@ -32,7 +32,9 @@ export default function AdicionarExercicioTreinoModal({
 }: AdicionarExercicioTreinoModalProps) {
   const [treinos, setTreinos] = useState<Treino[]>([]);
   const [treinoSelecionado, setTreinoSelecionado] = useState<string>('');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [series, setSeries] = useState<string>('3');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [repeticoes, setRepeticoes] = useState<string>('12');
   const [duracao, setDuracao] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);

@@ -105,7 +105,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         id: Date.now().toString(), // ID temporário simulado
         nome: nome,
         email: email
-        // senha não é armazenada no objeto User por questões de segurança
       };
       
       // Salvar o usuário no localStorage

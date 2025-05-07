@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/Card';
 import { FaPlay, FaEdit, FaTrash, FaLock, FaStar, FaRunning, FaDumbbell, FaChild, FaCalculator, FaTimes, FaPlus } from 'react-icons/fa';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Badge } from '@/components/ui/Badge';
 import AdicionarExercicioTreinoModal from './AdicionarExercicioTreinoModal';
 
@@ -96,9 +97,11 @@ export default function ExercicioCard({
             )}
             <div className="h-48 overflow-hidden">
               {imagem ? (
-                <img 
+                <Image 
                   src={imagem} 
                   alt={nome} 
+                  width={500}
+                  height={300}
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                 />
               ) : (
@@ -254,9 +257,11 @@ export default function ExercicioCard({
             </div>
           )}
           {imagem ? (
-            <img 
+            <Image 
               src={imagem} 
-              alt={nome} 
+              alt={nome}
+              width={192}
+              height={192} 
               className="w-full h-full object-cover"
             />
           ) : (

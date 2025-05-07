@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { FaHome, FaDumbbell, FaCalendarAlt, FaChartLine, FaRunning, FaUser, FaSignOutAlt, FaCog } from 'react-icons/fa';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/lib/AuthContext';
