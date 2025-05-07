@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/Card';
 import Timer from '@/components/Timer';
-import { FaArrowLeft, FaCheck, FaPlay, FaStop, FaSave } from 'react-icons/fa';
+import { FaArrowLeft, FaCheck, FaSave } from 'react-icons/fa';
 import Link from 'next/link';
 
 // Dados fictícios para demonstração
@@ -63,7 +63,7 @@ const treinoMock = {
 
 export default function IniciarTreinoPage({ params }: { params: { id: string } }) {
   const router = useRouter();
-  const [treino, setTreino] = useState(treinoMock);
+  const [treino, _setTreino] = useState(treinoMock);
   const [exercicioAtual, setExercicioAtual] = useState(0);
   const [exerciciosConcluidos, setExerciciosConcluidos] = useState<string[]>([]);
   const [treinoFinalizado, setTreinoFinalizado] = useState(false);

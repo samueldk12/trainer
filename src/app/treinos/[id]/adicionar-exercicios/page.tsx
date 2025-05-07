@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { FaArrowLeft, FaPlus, FaFilter, FaSearch, FaDumbbell, FaCheck } from 'react-icons/fa';
 import ExercicioCard from '@/components/ExercicioCard';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 interface Exercicio {
   id: string;
@@ -149,7 +149,7 @@ export default function AdicionarExerciciosPage({ params }: { params: { id: stri
         throw new Error(errorData.error || 'Erro ao adicionar exercícios ao treino');
       }
       
-      const data = await response.json();
+      await response.json();
       
       // Mostra mensagem de sucesso
       setSucesso(true);
